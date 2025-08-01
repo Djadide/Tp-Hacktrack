@@ -24,6 +24,26 @@ Mini front intégré statique (HTML+CSS+JS dans public/index.html), utilisable s
 
 🚦 Structure du projet
 
+EmargementApi
+├── controllers
+│   ├── sessionController.js
+│   └── userController.js
+├── Middleware
+│   └── auth.js
+├── models
+│   ├── Session.js
+│   └── User.js
+├── node_modules/
+├── public/
+│   └── index.html
+├── routes
+│   ├── sessionRoutes.js
+│   └── userRoutes.js
+├── server.js
+├── .env
+├── package.json
+└── README.md
+
 
 🛠️ Installation et lancement
 
