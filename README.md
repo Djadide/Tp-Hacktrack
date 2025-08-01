@@ -29,7 +29,7 @@ Mini front intégré statique (HTML+CSS+JS dans public/index.html), utilisable s
 
 Cloner le repo et installer
 bash
-git clone
+git clone https://github.com/Djadide/Tp-Hacktrack.git
 cd EmargementApi
 npm install
 Configurer la base de données
@@ -114,7 +114,7 @@ Déploiement cloud (Render, Heroku, Vercel…)
 
 👤 Auteur & Licence
 
-Développé par [Ton nom ici]
+Développé par Djadide
 Projet éducatif pour découverte de la stack Node.js/Express/MongoDB/JWT.
 Licence : MIT
 Usage universitaire/pédagogique encouragé.
