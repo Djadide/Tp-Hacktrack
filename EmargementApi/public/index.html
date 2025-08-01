@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Test API Emargement</title>
+  <style>
+    body { font-family: Arial, sans-serif;}
+    label, input, button { margin:2px;}
+    .box { margin:1em 0; padding:1em; background:#f8f8f8; border:1px solid #ddd; max-width:480px;}
+    pre { background: #eee; padding: 6px;}
+    :root {
+      --main-bg: #f3f6fb;
+      --primary: #146ebe;
+      --primary-light: #269df5;
+      --success: #70c651;
+      --danger: #e74c3c;
+      --border: #d7e1ea;
+      --shadow: 0 2px 16px 0 rgba(28,61,140,0.08);
+    }
+    body {
+      min-height: 100vh;
+      background: var(--main-bg);
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 10px;
+      margin-top: 32px;
+      letter-spacing: 2px;
+      font-size: 2.2em;
+    }
+    .center-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.2em;
+      margin-bottom: 0.3em;
+    }
+    .flex {
+      display: flex; flex-wrap: wrap;
+      justify-content: center;
+      gap: 2.5em;
+      margin-top: 1.5em;
+    }
+    .main-grid {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 3em;
+      margin-top: 2.5em;
+      margin-bottom: 2em;
+    }
+
+    .main-grid > div {
+      display: flex;
+      flex-direction: column;
+      gap: 2em;
+    }
+
+    .result-center {
+      text-align: center;
+      max-width: 740px;
+      margin: 0 auto 2em auto;
+    }
+    @media (max-width:900px) {
+      .main-grid { flex-direction: column; align-items: center; gap: 1em;}
+    }
+
+    .box {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      padding: 2.2em 2em 1.5em 2em;
+      min-width: 300px;
+      max-width: 370px;
+      margin-bottom: 1.5em;
+      transition: box-shadow 0.2s;
+    }
+    .box:hover { box-shadow: 0 6px 32px 0 rgba(28,61,140,0.14); border-color: var(--primary-light);}
+    h3 {
+      color: var(--primary);
+      margin-top: 0;
+    }
+    form label, form select, form input, form button {
+      width: 100%; box-sizing: border-box; margin-bottom: 0.7em;
+    }
+    label { color: #333; font-weight: 500;}
+    input, select {
+      font-size: 1em;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccd6e3;
+      margin-top: 0.2em;
+      margin-bottom: 1em;
+      transition:border-color 0.2s;
+    }
+    input:focus, select:focus { border-color: var(--primary); outline: none; }
+    button {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 10px 0;
+      font-weight: 600;
+      font-size: 1.05em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover { background: var(--primary-light);}
+    #tokenBox {
+      background: #e9f5fd;
+      color: var(--primary);
+      padding: 0.6em;
+      margin-top: 1em;
+      border-radius: 6px;
+      font-size: 0.95em;
+      word-break: break-all;
+      min-height: 18px;
+      border: 1px solid #d0e4f6;
+    }
+    .actions button { width:auto; display: inline-block; margin:0 5px 10px 0;}
+    #authActions { margin-bottom: 2.5em; }
+    .feedback {
+      margin: 0 auto 1.5em auto;
+      max-width: 570px;
+      border-radius: 8px;
+      padding: 1em 1.2em;
+      font-size: 1.1em;
+      box-shadow: var(--shadow);
+      border-left: 7px solid var(--success);
+      background: #f4fff6;
+      color: #217a22;
+      animation: fadeIn 0.8s;
+    }
+    .feedback.error {
+      border-left: 7px solid var(--danger);
+      background: #fcf2f2;
+      color: var(--danger);
+    }
+    #result {
+      margin-top: 1.5em;
+      font-size: 1.04em;
+      border-radius: 8px;
+      border: 1px solid #cbe6fb;
+      background: #f5fafd;
+      min-height: 44px;
+      padding: 1em;
+      box-shadow: var(--shadow);
+      color: #21243e;
+      word-break: break-word;
+      max-width: 740px;
+      margin-left:auto; margin-right:auto;
+    }
+    @media (max-width:900px) {
+      .flex { flex-direction: column; align-items: center;}
+      .box { margin-bottom: 1.7em; }
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  </style>
+</head>
+<body>
+  <h1>API Emargement</h1>
+  <div class="main-grid">
+    <div>
+      <div class="box">
+        <h3>Inscription</h3>
+        <form id="registerForm">
+          <label>Email: <input name="email" required></label><br>
+          <label>Mot de passe: <input name="password" type="password" required></label><br>
+          <label>Rôle:
+            <select name="role">
+              <option value="etudiant">Etudiant</option>
+              <option value="formateur">Formateur</option>
+            </select>
+          </label><br>
+          <button type="submit">S'inscrire</button>
+        </form>
+      </div>
+    </div>
+    <div>
+      <div class="box">
+        <h3>Connexion</h3>
+        <form id="loginForm">
+          <label>Email: <input name="email" required></label><br>
+          <label>Mot de passe: <input name="password" type="password" required></label><br>
+          <button type="submit">Se connecter</button>
+        </form>
+        <div id="tokenBox"></div>
+      </div>
+      <div class="box" id="authActions" style="display:none">
+        <h3>Actions protégées (token requis)</h3>
+        <button id="getSessionsBtn">Voir toutes les sessions</button>
+        <button id="addSessionBtn">Créer une session</button>
+        <form id="signForm" style="margin-top:1em">
+          <label>ID Session à émarger: <input name="sessionId" required></label>
+          <button type="submit">Émarger</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-center">
+    <h3>Résultat API</h3>
+    <pre id="result"></pre>
+  </div>
+
+<script>
+let token = null;
+
+// Affichage joli du résultat
+function showResult(data) {
+  document.getElementById('result').textContent = typeof data === 'string' ? data : JSON.stringify(data, null, 2);
+}
+
+// Inscription utilisateur
+document.getElementById('registerForm').onsubmit = async function(e) {
+  e.preventDefault();
+  const fd = new FormData(this);
+  const info = Object.fromEntries(fd.entries());
+  const res = await fetch('http://localhost:3000/api/users/register', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(info)
+  });
+  const data = await res.json();
+  showResult(data);
+};
+
+// Connexion
+document.getElementById('loginForm').onsubmit = async function(e) {
+  e.preventDefault();
+  const fd = new FormData(this);
+  const info = Object.fromEntries(fd.entries());
+  const res = await fetch('http://localhost:3000/api/users/login', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(info)
+  });
+  const data = await res.json();
+  showResult(data);
+  if (data.token) {
+    token = data.token;
+    document.getElementById('tokenBox').textContent = "Token : " + token;
+    document.getElementById('authActions').style.display = '';
+  } else {
+    token = null;
+    document.getElementById('authActions').style.display = 'none';
+  }
+};
+
+// Voir toutes les sessions
+document.getElementById('getSessionsBtn').onclick = async function() {
+  const res = await fetch('http://localhost:3000/api/sessions', {
+    headers: { Authorization: 'Bearer ' + token }
+  });
+  showResult(await res.json());
+};
+
+// Créer une session de test
+document.getElementById('addSessionBtn').onclick = async function() {
+  if (!token) return alert("Vous devez vous connecter !");
+  const courseName = prompt("Nom du cours ?");
+  const date = prompt("Date (AAAA-MM-JJ) ?");
+  if (!courseName || !date) return;
+
+  const res = await fetch('http://localhost:3000/api/sessions', {
+    method: 'POST',
+    headers: {
+      'Content-Type':'application/json',
+      'Authorization': 'Bearer ' + token
+    },
+    body: JSON.stringify({ courseName, date })
+  });
+  showResult(await res.json());
+};
+
+
+// Emarger à une session
+document.getElementById('signForm').onsubmit = async function(e) {
+  e.preventDefault();
+  const sessionId = this.sessionId.value;
+  if (!sessionId) return;
+  const url = `http://localhost:3000/api/sessions/${sessionId}/sign`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { Authorization: 'Bearer ' + token }
+  });
+  showResult(await res.json());
+};
+</script>
+</body>
+</html>

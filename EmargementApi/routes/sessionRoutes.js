@@ -1,10 +1,8 @@
 import express from 'express';
-import mongoose from 'mongoose';
-const router = express.Router();
 import sessionController from '../controllers/sessionController.js';
 import auth from '../Middleware/auth.js';
-import sessionRoutes from '../routes/sessionRoutes.js';
 
+const router = express.Router();
 
 router.post('/', auth, sessionController.createSession);
 router.get('/', auth, sessionController.getSessions);

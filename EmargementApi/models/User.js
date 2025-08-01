@@ -3,7 +3,6 @@ import bcrypt from 'bcryptjs';
 
 // Définition du schéma utilisateur
 const userSchema = new mongoose.Schema({
-    name: String,
     email: { type: String, unique: true },
     password: String,
     role: { type: String, enum: ['formateur', 'etudiant'], default: 'etudiant' }

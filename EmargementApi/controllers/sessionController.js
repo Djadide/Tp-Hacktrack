@@ -3,10 +3,9 @@ import User from '../models/User.js';
 
 // Création d'une session
 const createSession = async (req, res) => {
-    const { title, date } = req.body;
+    const { courseName, date } = req.body;
     try {
-        
-        const newSession = new Session({ title, date });
+        const newSession = new Session({ courseName, date, attendees: [] });
         await newSession.save();
         res.status(201).json({ message: 'Session créée avec succès' });
     } catch (err) {
